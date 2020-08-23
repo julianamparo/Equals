@@ -1,10 +1,15 @@
+using Equals.Dominio.Contratos;
+using Equals.Repositorio.Contexto;
+using Equals.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Equals.Web
 {
@@ -12,7 +17,10 @@ namespace Equals.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -20,7 +28,20 @@ namespace Equals.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });*/
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            var connectionString = Configuration.GetConnectionString("MySqlConnection");
+            services.AddDbContext<EqualsContexto>(option => option.UseLazyLoadingProxies() 
+                                                                   .UseMySql(connectionString,
+                                                                    m => m.MigrationsAssembly("Equals.Repositorio")));
+            services.AddScoped<IArquivoRepositorio, ArquivoRepositorio>();
+            services.AddScoped<IAdquirenteRepositorio, AdquirenteRepositorio>();
+            services.AddScoped<ITipoArquivoRepositorio, TipoArquivoRepositorio>();
+            services.AddScoped<IFagammonCardRepositorio, FagammonCardRepositorio>();
+            services.AddScoped<IUflaCardRepositorio, UflaCardRepositorio>();
+            services.AddScoped<ILogErroRepositorio, LogErroRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -61,11 +82,11 @@ namespace Equals.Web
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    //spa.UseAngularCliServer(npmScript: "start");
+                //if (env.IsDevelopment())
+                //{
+                    spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
-                }
+                //}
             });
         }
     }

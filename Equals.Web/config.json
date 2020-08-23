@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "MySqlConnection": "server=localhost; uid=root;pwd=burger;database=adquirentedb"
+  }
+}
+
