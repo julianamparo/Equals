@@ -27,14 +27,8 @@ export class ArquivoServico implements OnInit{
   }
 
   public cadastrar(arquivo: Arquivo): Observable<Arquivo> {
-    const headers = new HttpHeaders().set('content-type', 'application/json')
 
-    var body = {
-      nome: arquivo.nomearquivo,
-      recepcionado: arquivo.recepcionado,
-      datarecepcao: arquivo.datarecepcao
-    }
-    return this.http.post<Arquivo>(this, this._baseUrl + "api/arquivo/salvar", JSON.stringify(arquivo), { headers: this.headers })
+    return this.http.post<Arquivo>(this._baseUrl + "api/arquivo/carregar", JSON.stringify(arquivo), { headers: this.headers });
   }
 
   public obterArquivos(): Observable<Arquivo[]> {

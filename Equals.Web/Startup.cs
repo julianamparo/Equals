@@ -1,4 +1,4 @@
-using Equals.Dominio.Contratos;
+ using Equals.Dominio.Contratos;
 using Equals.Repositorio.Contexto;
 using Equals.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
@@ -84,7 +84,7 @@ namespace Equals.Web
 
                 //if (env.IsDevelopment())
                 //{
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 //}
             });
