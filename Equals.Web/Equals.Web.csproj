@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\arquivo\arquivo.component.ts" />
+    <None Remove="ClientApp\src\app\modelo\arquivo.ts" />
+    <None Remove="ClientApp\src\app\servicos\arquivos\arquivo.servico.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,8 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\arquivo\arquivo.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\arquivo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servicos\arquivos\arquivo.servico.ts" />
   </ItemGroup>
 
   <ItemGroup>

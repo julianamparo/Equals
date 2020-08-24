@@ -10,7 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ArquivoComponent } from './arquivo/arquivo.component';
-
+import { ArquivoServico } from './servicos/arquivos/arquivo.servico'
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,7 @@ import { ArquivoComponent } from './arquivo/arquivo.component';
       { path: 'arquivo', component: ArquivoComponent }
     ])
   ],
-  providers: [],
+  providers: [ArquivoServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
