@@ -4,8 +4,8 @@ import { ArquivoServico } from "../servicos/arquivos/arquivo.servico";
 
 @Component({
   selector: "app-arquivo",
-  templateUrl: "./produto.component.html",
-  styleUrls: ["./produto.component.css"]
+  templateUrl: "./arquivo.component.html",
+  styleUrls: ["./arquivo.component.css"]
 
 })
 export class ArquivoComponent implements OnInit {

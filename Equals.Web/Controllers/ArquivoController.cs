@@ -104,19 +104,5 @@ namespace Equals.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
-
-        [HttpPost]
-        public IActionResult Post([FromBody]Arquivo arquivo)
-        {
-            try
-            {
-                _arquivoRepositorio.Adicionar(arquivo);
-                return Created("api/arquivo", arquivo);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }
