@@ -26,18 +26,25 @@ export class ArquivoServico implements OnInit{
     return new HttpHeaders().set('content-type', 'application/json');
   }
 
-  public cadastrar(arquivo: Arquivo): Observable<Arquivo> {
+  public carregar(arquivo: Arquivo): Observable<Arquivo> {
 
     return this.http.post<Arquivo>(this._baseUrl + "api/arquivo/carregar", JSON.stringify(arquivo), { headers: this.headers });
+  }
+
+  public arquivoUpload(arquivoSelecionado: File): Observable<boolean> {
+    const formData: FormData = new FormData();
+    formData.append("arquivoCarregado", arquivoSelecionado, arquivoSelecionado.name);
+    return this.http.post<boolean>(this._baseUrl + "api/arquivo/arquivoUpload", formData);
+
   }
 
   public obterArquivos(): Observable<Arquivo[]> {
     return this.http.get<Arquivo[]>(this._baseUrl + "api/arquivo");
   }
 
-  public obterArquivo(arquivoId: number): Observable<Arquivo> {
-    return this.http.get<Arquivo>(this._baseUrl + "api/arquivo/obter");
-  }
+  //public obterArquivo(arquivoId: number): Observable<Arquivo> {
+  //  return this.http.get<Arquivo>(this._baseUrl + "api/arquivo/obter");
+  //}
 
 
 }

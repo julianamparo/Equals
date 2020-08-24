@@ -3,6 +3,7 @@ using Equals.Repositorio.Contexto;
 using Equals.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -28,9 +29,7 @@ namespace Equals.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.AddMvc().AddJsonOptions(options => {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });*/
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             var connectionString = Configuration.GetConnectionString("MySqlConnection");
             services.AddDbContext<EqualsContexto>(option => option.UseLazyLoadingProxies() 
