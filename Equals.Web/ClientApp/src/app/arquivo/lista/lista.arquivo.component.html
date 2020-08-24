@@ -1,0 +1,26 @@
+<p *ngIf="!arquivos">Carregando Arquivos...</p>
+
+<div *ngFor=" let a of arquivos">
+
+      {{a.nomeArquivo}} || {{a.recepcionado}}
+  
+</div>
+
+<table class="table table-hover" *ngIf="arquivos">
+   <thead>
+     <tr>
+       <th>Nome do Arquivo</th>
+       <th>Recepcionado</th>
+       <th>Data Recepcao</th>
+     </tr>
+   </thead>
+  <tbody>
+    <tr *ngFor="let a of arquivos">
+      <td>{{a.nomeArquivo}}</td>
+      <td>{{a.recepcionado}}</td>
+      <td>{{a.dataRecepcao}}</td>
+
+    </tr>
+  </tbody>
+
+</table>
